@@ -1,0 +1,120 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX 5  
+int top,arr[MAX];  
+void push();
+void pop();
+void length();
+int is_empty();
+int is_full();
+void display();
+void peek();
+void main()
+{
+top=-1;
+int ch;
+printf("Options\n1.Push\n2.Pop\n3.Length\n4.Peek\n5.Display\n6.Exit\n");
+while(1)
+{
+
+printf("\nEnter an option : ");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:
+push();
+break;
+case 2:
+pop();
+break;
+case 3:
+length();
+break;
+case 4:
+printf("The top most element is : ");
+peek();
+break;
+case 5:
+printf("Displaying the stack : ");
+display();
+break;
+case 6:
+exit(-1);
+default:
+printf("Invalid option.\n");
+
+
+}
+
+}
+
+}
+int isempty()
+{
+if(top == -1)
+return 1;
+return 0;
+}
+
+int isfull()
+{
+if(top==MAX)
+return 1;
+return 0;
+}
+
+void pop()
+{
+int x;
+if(isempty()==1)
+printf("Stack underflow.\n");
+else
+{
+
+x=arr[top];
+top--;
+printf("The element deleted is %d",x);
+}
+}
+
+void push()
+{
+int x;
+if(isfull() == 1)
+printf("Stack overflow.\n");
+else
+{
+printf("Enter the element : ");
+scanf("%d",&x);
+top++;
+arr[top]=x;
+}
+}
+
+void peek()
+{
+if(isempty()==1)
+printf("Stack underflow.\n");
+else
+{
+printf("%d",arr[top]);
+}
+}
+void display()
+{
+int i=top;
+if(top==-1)
+printf("Stack underflow.\n");
+else
+{
+while(i != -1)
+{
+printf("%d ",arr[i]);
+i-=1;
+}
+}
+}
+void length()
+{
+printf("The length of the stack is : %d",top+1);
+}
