@@ -1,0 +1,134 @@
+include<stdio.h>
+#include<stdlib.h>
+int linearsearch(int a[], int n, int key) {
+int res;
+    for(int i=0;i<n;i++) {
+        if(a[i]==key)
+            return i;
+    }
+    return -1;
+}
+int linearsearchrec(int a[], int n, int key) {
+int res;
+n--;
+if(n>=0) {
+if(a[n] == key)
+return n;
+else
+res = linearsearch(a,n,key);
+}
+else
+return -1;
+return res;
+}
+int binarysearch(int A[], int low, int high, int key) {
+    int mid;
+    while(low <= high){
+        mid = (low + high)/2;
+        if(key == A[mid]) {
+            return mid;
+        }
+        else if(A[mid] < key) {
+            low = mid + 1;
+        }
+        else{
+            high = mid - 1;
+        }
+    }
+    return -1;
+}
+int binarysearchrec(int A[], int low, int high, int key) {
+    int mid;
+    if(low > high)
+        return -1;
+    mid = low+(high - low)/2;
+    if(key == A[mid])
+        return mid;
+    else if(key < A[mid])
+        return binarysearchrec(A,low , mid-1,key);
+    else
+       return binarysearchrec(A, mid +1,high ,key);
+   
+}
+int main()
+{
+    int ch,n,i;
+    int key,res,a[100],low = 0;
+    int A[n],high;
+    while(1)
+    {
+        printf("options 1.Linearsearch\n 2.Linear recursive \n 3.binarysearch \n 4.binary recursive\n 5.exit\n");
+        printf("enter your choice\n");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1: printf("Enter n: ");
+               scanf("%d",&n);
+               for(int i=0;i<n;i++) {
+                scanf("%d",&a[i]);
+               }
+               printf("Enter key: ");
+               scanf("%d",&key);
+               res = linearsearch(a,n,key);
+               if(res == -1)
+                 printf("Not found\n");
+                  else
+                 printf("Found at %d\n",res);
+           break;
+case 2:
+printf("Enter n: ");
+scanf("%d",&n);
+for(int i=0;i<n;i++) {
+scanf("%d",&a[i]);
+}
+printf("Enter key : ");
+scanf("%d",&key);
+res = linearsearchrec(a,n,key);
+if(res == -1)
+printf("Not found\n");
+else
+printf("Found at %d\n",res);
+
+break;
+    case 3:
+    printf("Enter n: ");
+    scanf("%d",&n);
+    A[n],key, high = n - 1;
+    printf("Enter the array elements : ");
+    for(i=0;i<n;i++){
+        scanf("%d",&A[i]);
+    }
+    printf("Enter the key value : ");
+    scanf("%d",&key);
+    res = binarysearch(A, low, high, key);
+    if(res == -1)
+        printf("Search unsuccessful");
+    else
+        printf("Search successful at %d", res);
+    break;  
+       
+       
+    case 4:
+    printf("Enter n: ");
+    scanf("%d",&n);
+    A[n],key, high = n - 1;
+    printf("Enter the array elements : ");
+    for(i=0;i<n;i++){
+        scanf("%d",&A[i]);
+    }
+    printf("Enter the key value : ");
+    scanf("%d",&key);
+   
+    res = binarysearchrec(A, low, high, key);
+    if(res == -1)
+        printf("Search unsuccessful");
+    else
+        printf("Search successful at %d", res);
+    break;  
+    case 5:exit(0);
+
+        }
+           
+        }
+    return 0;
+}
