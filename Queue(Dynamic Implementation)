@@ -1,0 +1,124 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct Node{
+        int data;
+        struct Node *next;
+}Node;
+Node *front = NULL;
+Node *rear = NULL;
+Node *cur = NULL;
+Node *getNode();
+void enqueue();
+void dequeue();
+void length();
+void display();
+Node *getNode() {
+        Node *new = (Node *)malloc(sizeof(Node));
+        printf("Enter data: ");
+        scanf("%d",&new->data);
+        new->next=NULL;
+        return new;
+}
+int isempty()
+{
+    if ((front == NULL) && (rear == NULL))
+    return 1;
+    return 0;
+}
+
+void enqueue()
+{
+    Node *new = getNode();
+    if(isempty())
+    front = rear = new;
+    else
+    {
+        rear->next=new;
+        rear=new;
+    }
+}
+void dequeue()
+{
+    if(isempty())
+    printf("Queue underflow.\n");
+    else if(rear == front)
+    {
+        int x = rear->data;
+        printf("%d is deleted\n",x);
+        rear=front=NULL;
+    }
+    else
+    {
+        int x=front->data;
+        cur = front;
+        printf("%d is deleted\n",x);
+        front = front->next;
+        free(cur);
+    }
+   
+}
+
+void display()
+{
+   
+    if(front == NULL)
+    printf("Queue is empty!\n");
+    else
+    {
+    cur=front;
+    while(cur != NULL)
+    {
+        printf("%3d",cur->data);
+        cur=cur->next;
+    }
+    }
+}
+
+void length()
+{
+    int count=0;
+    cur=front;
+    while(cur != NULL)
+    {
+        count++;
+        cur = cur->next;
+    }
+    printf("The length of the queue is : %d ",count);
+}
+
+void main()
+{
+int ch,p;
+printf("Options\n1.Enqueue\n2.Dequeue\n3.Length\n4.Display\n5.Exit\n");
+while(1)
+{
+
+printf("\nEnter an option : ");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:
+enqueue();
+break;
+case 2:
+dequeue();
+break;
+case 3:
+length();
+break;
+case 4:
+printf("The Queue is : ");
+display();
+break;
+case 5:
+exit(-1);
+default:
+printf("Invalid option.\n");
+
+
+}
+
+}
+
+}
+
