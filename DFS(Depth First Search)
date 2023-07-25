@@ -1,0 +1,54 @@
+#include <stdio.h>
+#define max 4
+
+int g[max][max];
+int visited[max] = {0};
+int stack[max];
+int top = -1;
+
+void push(int n) {
+    if(top == max - 1) {
+        printf("\nStack is full\n");
+        return;
+    }
+    stack[++top] = n;
+}
+
+int pop() {
+    if(top == -1) {
+        printf("\nStack is empty\n");
+        return -1;
+    }
+    return stack[top--];
+}
+
+void dfs(int v, int n) {
+    push(v);
+    while(top != -1) {
+        v = pop();
+        if(!visited[v]) {
+            visited[v] = 1;
+            printf("%d ", v);
+        }
+        for(int i=n; i>=1; i--) {
+            if(g[v][i] == 1 && !visited[i]) {
+                push(i);
+            }
+        }
+    }
+}
+
+int main() {
+    int n;
+    printf("Enter number of vertices : ");
+    scanf("%d",&n);
+    for(int i=1; i<=n; i++) {
+        for(int j=1; j<=n; j++) {
+            printf("\nEnter edge (%d,%d) : ", i, j);
+            scanf("%d", &g[i][j]);
+        }
+    }
+    printf("\nDFS traversal of graph: ");
+    dfs(1, n);
+    return 0;
+}
